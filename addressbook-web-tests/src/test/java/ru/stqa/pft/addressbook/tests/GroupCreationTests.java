@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 public class GroupCreationTests {
     FirefoxDriver wd;
@@ -33,21 +34,41 @@ public class GroupCreationTests {
 
     @Test
     public void testGroupCreation() {
-        wd.findElement(By.linkText("groups")).click();
-        wd.findElement(By.name("new")).click();
-        wd.findElement(By.name("group_name")).click();
-        wd.findElement(By.name("group_name")).clear();
-        wd.findElement(By.name("group_name")).sendKeys("test1");
-        wd.findElement(By.name("group_header")).click();
-        wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys("test2");
-        wd.findElement(By.name("group_footer")).click();
-        wd.findElement(By.name("group_footer")).clear();
-        wd.findElement(By.name("group_footer")).sendKeys("test3");
-        wd.findElement(By.name("submit")).click();
+        goToGroupPage();
+        groupCreation();
+        fillGroupData(new GroupData("test1", "test2", "test3"));
+        submitGroupCreation();
+        returnToGroupPage();
+    }
+
+    private void returnToGroupPage() {
         wd.findElement(By.linkText("group page")).click();
     }
-    
+
+    private void submitGroupCreation() {
+        wd.findElement(By.name("submit")).click();
+    }
+
+    private void fillGroupData(GroupData groupData) {
+        wd.findElement(By.name("group_name")).click();
+        wd.findElement(By.name("group_name")).clear();
+        wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
+        wd.findElement(By.name("group_header")).click();
+        wd.findElement(By.name("group_header")).clear();
+        wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
+        wd.findElement(By.name("group_footer")).click();
+        wd.findElement(By.name("group_footer")).clear();
+        wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+    }
+
+    private void groupCreation() {
+        wd.findElement(By.name("new")).click();
+    }
+
+    private void goToGroupPage() {
+        wd.findElement(By.linkText("groups")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
