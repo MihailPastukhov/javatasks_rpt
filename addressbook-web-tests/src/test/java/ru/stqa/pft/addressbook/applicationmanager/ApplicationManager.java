@@ -29,11 +29,13 @@ public class ApplicationManager {
     public void init() {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        wd.manage().window().maximize();
         wd.get("http://localhost/addressbook/");
         sessionHelper = new SessionHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         groupHelper = new GroupHelper(wd);
         contactHelper = new ContactHelper(wd);
-        navigationHelper = new NavigationHelper(wd);
+
         sessionHelper.login("admin", "secret");
     }
 
