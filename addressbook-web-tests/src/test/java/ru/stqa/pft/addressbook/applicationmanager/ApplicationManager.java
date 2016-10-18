@@ -30,9 +30,9 @@ public class ApplicationManager {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
+        sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);
         contactHelper = new ContactHelper(wd);
-        sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper.login("admin", "secret");
     }
