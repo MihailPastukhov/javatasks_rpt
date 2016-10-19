@@ -22,6 +22,11 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private String browser;
 
+    public ApplicationManager(String browser) {
+
+        this.browser = browser;
+    }
+
     public static boolean isAlertPresent(FirefoxDriver wd) {
         try {
             wd.switchTo().alert();
@@ -31,9 +36,7 @@ public class ApplicationManager {
         }
     }
 
-    public void init(String browser) {
-        this.browser = browser;
-        //String browser = BrowserType.FIREFOX;
+    public void init() {
         if (browser == BrowserType.FIREFOX){
             wd = new FirefoxDriver();
         }
