@@ -50,7 +50,7 @@ public class ApplicationManager {
 
 
 
-        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         wd.manage().window().maximize();
         wd.get("http://localhost/addressbook/");
         sessionHelper = new SessionHelper(wd);
