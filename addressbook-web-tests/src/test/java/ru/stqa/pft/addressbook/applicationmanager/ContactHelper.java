@@ -41,16 +41,6 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    private boolean isElementPresent(By locator) {
-        try {
-            wd.findElement(locator);
-            return true;
-        } catch (NoSuchElementException ex){
-            return false;
-        }
-
-    }
-
     public void contactCreation() {
         click(By.linkText("add new"));
     }
