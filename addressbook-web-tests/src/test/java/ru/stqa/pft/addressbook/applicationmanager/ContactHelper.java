@@ -64,7 +64,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initEditingSelectedContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        click(By.cssSelector("img[alt=Edit]"));
     }
 
     public void deleteSelectedContact() {
