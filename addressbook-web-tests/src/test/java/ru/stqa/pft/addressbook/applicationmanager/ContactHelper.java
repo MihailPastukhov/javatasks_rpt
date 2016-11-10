@@ -10,6 +10,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 10/18/2016.
  */
@@ -51,8 +54,8 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void updateContact() {
@@ -81,5 +84,18 @@ public class ContactHelper extends HelperBase {
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.xpath(".//*[@id='maintable']/tbody/tr[@name='entry']"));
+        for (int i=1 ; i < elements.size()+1 ; i++){
+            String lastName = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[@name='entry']["+i+"]/td[2]")).getText();
+            String firstName = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[@name='entry']["+i+"]/td[3]")).getText();
+            ContactData contact = new ContactData(firstName, lastName, null, null, null, null);
+            contacts.add(contact);
+        }
+
+        return contacts;
     }
 }
