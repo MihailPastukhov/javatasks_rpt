@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.applicationmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -76,5 +77,9 @@ public class ContactHelper extends HelperBase {
         fillContactData(contactData, true);
         submitContactCreation();
         returnToHomePage();
+    }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }

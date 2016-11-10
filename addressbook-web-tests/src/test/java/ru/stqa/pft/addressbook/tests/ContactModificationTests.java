@@ -22,11 +22,13 @@ public class ContactModificationTests extends TestBase {
             app.getNavigationHelper().goToHomePage();
             app.getContactHelper().createContact(new ContactData("test1", "test1", "test1, 123", "123-123-123", "test1@test1.com", "none"));
         }
-
+        int before = app.getContactHelper().getContactCount();
         app.getContactHelper().initEditingSelectedContact();
         app.getContactHelper().fillContactData(new ContactData("testFirstName1", "testLastName1", "testAddress, 123 1", "123-123-123-1", "test1@test11.com", null), false);
         app.getContactHelper().updateContact();
         app.getContactHelper().returnToHomePage();
+        int after = app.getContactHelper().getContactCount();
+        Assert.assertEquals(after, before);
 
     }
 }
